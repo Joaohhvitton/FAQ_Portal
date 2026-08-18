@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ · Portal do Cliente — redeFlex</title>
+  <meta name="description" content="Guia de atendimento do Portal do Cliente redeFlex, com simulador passo a passo das telas reais.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="site-header-inner">
+      <div class="site-brand">
+        <img class="site-logo" src="assets/redeflex-logo.svg" alt="redeFlex">
+        <span class="site-brand-divider" aria-hidden="true"></span>
+        <span class="site-brand-tag">Central de Ajuda</span>
+      </div>
+      <div class="site-header-right">
+        <button class="header-search-btn" id="headerSearchBtn" type="button" aria-label="Buscar assunto">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+        <nav class="site-nav">
+          <a href="#" class="active"><span class="nav-dot" aria-hidden="true"></span>FAQ · Dúvidas</a>
+        </nav>
+      </div>
+    </div>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <div class="page-head anim-hero">
+    <span class="eyebrow">FAQ · Portal do Cliente</span>
+    <h1>Como <em>utilizo</em> o Portal Redeflex?</h1>
+    <p class="lead">Guia de atendimento com um simulador passo a passo, recriado a partir das telas reais do Portal. Busque pelo assunto ou pela dúvida do cliente.</p>
+
+    <div class="hero-search">
+      <span class="hs-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </span>
+      <input id="searchInput" type="text" placeholder="Buscar: login, taxas, antecipação, simulador de vendas…" autocomplete="off" aria-label="Buscar assunto">
+      <kbd class="hs-kbd" id="searchKbd" aria-hidden="true">/</kbd>
+      <button id="searchClear" class="hs-clear" aria-label="Limpar busca" hidden>✕</button>
+    </div>
+
+    <div class="quick-chips" id="quickChips" aria-label="Mais buscados">
+      <span class="qc-label">Mais buscados:</span>
+      <button class="qc" data-q="login">Acesso ao Portal</button>
+      <button class="qc" data-q="senha">Redefinir senha</button>
+      <button class="qc" data-q="taxas">Taxas / MDR</button>
+      <button class="qc" data-q="antecipação">Antecipação</button>
+      <button class="qc" data-q="simulador">Simulador de vendas</button>
+    </div>
+
+    <div class="hero-meta"><span id="resultCount">8 assuntos</span> · 8 tutoriais disponíveis</div>
+  </div>
+
+  <!-- ===== LISTA DE ASSUNTOS (render por app.js) ===== -->
+  <main class="grid-wrap">
+    <div id="grid"></div>
+    <div class="empty-state" id="emptyState" hidden>
+      <div class="empty-icon" aria-hidden="true">🔍</div>
+      <h3>Nenhum assunto encontrado</h3>
+      <p>Tente outro termo, como "senha", "taxas" ou "antecipação".</p>
+    </div>
+  </main>
+
+  <!-- ===== MODAL / SIMULADOR ===== -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Simulador do Portal" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-top">
+        <span class="badge">Simulador · Portal do Cliente</span>
+        <button class="close-btn" id="closeBtn" aria-label="Fechar simulador">✕</button>
+      </div>
+      <div class="tab-nav" id="tabNav"></div>
+      <div class="sim-body">
+        <div class="screen-stage" id="screenStage"></div>
+        <div class="step-panel">
+          <div class="step-progress" aria-hidden="true"><span id="stepProgress"></span></div>
+          <span class="step-pill" id="stepBadge"></span>
+          <div class="panel-inner">
+            <h3 id="stepTitle"></h3>
+            <p id="stepText"></p>
+          </div>
+          <div class="dots" id="dots"></div>
+          <div class="nav-row">
+            <button class="nav-btn prev" id="prevBtn">‹ Anterior</button>
+            <button class="nav-btn next" id="nextBtn">Próximo ›</button>
+          </div>
+        </div>
+      </div>
+      <div class="disclaimer">Simulação ilustrativa para treinamento — valores fictícios.</div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-logo" src="assets/redeflex-logo.svg" alt="redeFlex">
+        <p>Central de Conhecimento: Portal Solver.</p>
+        <p>Guia interno de atendimento ao Portal do Cliente redeFlex.</p>
+      </div>
+      <div class="footer-cols" id="footerCols">
+        <div class="footer-col">
+          <h4>Assuntos</h4>
+          <a href="#login">Acesso ao Portal</a>
+          <a href="#redefinicao">Redefinir senha</a>
+          <a href="#taxas">Taxas e tarifas</a>
+          <a href="#simulador_vendas">Simulador de vendas</a>
+        </div>
+        <div class="footer-col">
+          <h4>Portal</h4>
+          <a href="https://portal.solverpag.com.br/" target="_blank" rel="noopener">Acessar o Portal ↗</a>
+          <a href="#agendas">Agenda de recebíveis</a>
+          <a href="#antecipacoes">Antecipações</a>
+        </div>
+        <div class="footer-col">
+          <h4>Suporte</h4>
+          <a href="#">Central de Atendimento</a>
+          <a href="#">Base de conhecimento OPCOM</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span>© <span id="footerYear">2026</span> RedeFlex · Uso para Clientes</span>
+      <span class="footer-conf">FAQ</span>
+    </div>
+  </footer>
+
+  <!-- ===== BOTÃO VOLTAR AO TOPO ===== -->
+  <button class="to-top" id="toTopBtn" aria-label="Voltar ao topo" hidden>
+    <svg class="to-top-ring" viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="17.5" class="ring-bg"></circle>
+      <circle cx="20" cy="20" r="17.5" class="ring-fill" id="toTopRing"></circle>
+    </svg>
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="to-top-arrow"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </button>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
